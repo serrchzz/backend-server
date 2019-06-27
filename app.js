@@ -6,6 +6,14 @@ var bodyParser = require('body-parser');
 // Inicializar variables
 var app = express();
 
+//cors
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+    next();
+});
+
 
 // Body Parser
 // parse application/x-www-form-urlencoded
@@ -26,6 +34,8 @@ var imagenesRoutes = require('./routes/imagenes');
 
 // Conexión a la base de datos
 mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB', (err, res) => {
+    //mongoose.connection.openUri('mongodb://45.55.39.196:3000/hospitalDB', (err, res) => {
+
 
     if (err) throw err;
 
